@@ -26,7 +26,7 @@ int main()
 	cin>>s;
 	cout<<"Goal node : ";
 	cin>>g;
-	ord.push_back(s);
+	ord.push_back(s);               // starting node
 
 	states=new int[n];
 	visited=new int[n];
@@ -54,10 +54,9 @@ int main()
 				cost[j]=a[i][j]+cost[i];
 				parent[j]=i;
 			}
-			t.sort();
-			ord.merge(t);
-			t.clear();
 		}
+			ord.merge(t);                           // adding to closed list
+			t.clear();
 		visited[i]=1;
 	}
 
@@ -65,10 +64,10 @@ int main()
 	for(i=0;i<n;i++)
 		cout<<states[i]<<"\t"<<visited[i]<<"\t"<<parent[i]<<"\t"<<cost[i]<<endl;
 
-	t.push_back(g);
+	t.push_back(g);                                                                     // goal node
 	for(r=t.begin();parent[*r]!=-1 && r!=t.end();r++)
 		t.push_back(parent[*r]);
-	t.reverse();
+	t.reverse();                                                                        // path is traced
 	if(t.size()<2)
 		cout<<g<<" can not be reached\n";
     else
